@@ -17,3 +17,5 @@ with open("losowytext.txt", "r") as f:
         wyrazy[i] = wyrazy[i].replace("\n", "")
         if len(wyrazy[i]) > 4 and wyrazy[i] == wyrazy[i][::-1]:
             print(wyrazy[i])
+            
+#ZADANIE DODATKWE SKROCIC PROGRAM NAJBARDZIEJ JAK SIE DA

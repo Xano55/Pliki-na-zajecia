@@ -1,1 +1,1 @@
-# Pliki-na-zajecia
+# Pliki-na-zajecia zabij sie

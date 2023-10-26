@@ -1,77 +1,93 @@
 '''
-Metody sortownia
-K>K 2023
-v. 1.0
+Metody sortowania
+K>K> 2023
+v. 1.0 
 '''
-import random as rd
- 
-#funkcja wyswietlajaca menu
+from random import randint as rdint
+
+# funkcja wyświetlająca menu
 def menu():
     print(
-        '''
-        MENU
+        """
+        Menu:
         b - bubble sort,
         i - inser sort,
         s - selection sort,
-        q - quick sort  
-        '''
-    )
-    
+        q - quick sort
+        """)
+
+#dekorator pomiaru czasu
 def pomiarczasu():
     pass
-#bubble sort
+
+# bubble sort
 def bubblesort(numbers):
     for i in range(len(numbers)):
-        min_i = i
         for j in range(len(numbers)-1):
-            if numbers[min_i] > numbers[j]:
-                min_i = j
-            numbers[min_i], numbers[i] = numbers[i], numbers[min_i]
-            print(numbers, "\n")
-    return numbers;
+            if numbers[j] > numbers[j+1]:
+                numbers[j], numbers[j+1] = numbers[j+1], numbers[j]
+    return numbers            
+
 #insert sort
 def insertsort(numbers):
-    for i in range(1,len(n)):
+    for i in range(1,len(numbers)):
         j = i
         while numbers[j] < numbers[j-1] and j > 0:
             numbers[j], numbers[j-1] = numbers[j-1], numbers[j]
             j -= 1
     return numbers
 #selection sort
-def selectionsort():
-    pass
-#quicksort
-def quicksort():
-    pass
+def selectionsort(numbers):
+    for i in range(len(numbers)):
+        min_i = i
+        for j in range(i, len(numbers)):
+            if numbers[min_i] > numbers[j]:
+                min_i = j
+        numbers[min_i], numbers[i] = numbers[i], numbers[min_i]
+        print(numbers, "\n")
+    return numbers
+#quicksort 
+def quicksort(numbers):
+    if len(numbers) <= 1:
+        return numbers
+    else:                                                          
+        pivot = numbers[0]
+        left = [i for i in numbers[1:] if i < pivot]
+        right = [i for i in numbers[1:] if i >= pivot]
+        return quicksort(left) + [pivot] + quicksort(right) 
+    return numbers
+#pobieranie danych do generat ora  
 def pobierz():
     pass
+#generator liczb
 def generator():
-    print("===== Generowanie Liczb =====")
-    n = int(input("Podaj ilość liczb do wygenerowania"))
+    print("====== Generowanie liczb =========")
+    n = int(input("Podaj ilość liczb do generowania: "))
     while n == 0:
-        print("podales 0 bezmozgu")
-        n = int(input("Podaj ilość liczb do wygenerowania"))
-    d = int(input("Podaj dolny zakres liczb"))
-    g = int(input("Podaj gorny zakres liczb"))
-    if d > g: g = g, d
-    nums = [rd.randint(d, g) for i in range(n)]
-    return nums
+        print("Podałeś zero. ")
+        n = int(input("Podaj ilość liczb do generowania: "))   
+    
+    d = int(input("Podaj dolny zakres liczb: "))
+    g = int(input("Podaj górny zakres liczb: "))
+    if d > g: d, g = g, d
+    nums = [ rdint(d,g) for i in range(n) ]
+    return nums 
 
-def show(numbers, jakie = True):
+def show(numbers, jakie= True):
     if jakie == True:
-        print(f"\nLiczby przed sortowaniem to:")
-        print(numbers)
+        print(f"\nLiczby przed sortowaniem to:") 
+        print(numbers)   
     else:
-        print(f"\nPosortowane liczby to:")
-        print(numbers)
-        
+        print(f"\nPosortowane liczby to:") 
+        print(numbers)  
+#główna funkcja aplikacji
+
 def witaj():
     print("\n")
     print("=" * 50)
     print("Sortowanie liczb")
     print("=" * 50)
-
-#glowna funkcja aplikacji
+    
 def main():
     czygen = True
     witaj()
@@ -79,48 +95,50 @@ def main():
         if czygen == True:
             numbers_g = generator()
         menu()
-        wybor = input("Wybierz metode sortowania: ")
-        if wybor in ('b', 'i', 's', 'q'):
-            possort = [], 
-            if wybor == 'b':
-                liczby = numbers_g.copy()
-                show(liczby, True)
+        wybor = input("Wybierz metodą sortowania: ")
+        if wybor in ('b', 'i', 's','q'):
+            posort = []
+            if wybor =='b':   
+                liczby = numbers_g.copy()             
+                show(liczby)
                 posort = bubblesort(liczby)
-                show(possort, False)
+                show(posort, False)
             elif wybor == 'i':
                 liczby = numbers_g.copy()
-                show(liczby, True)
+                show(liczby)
                 posort = insertsort(liczby)
-                show(possort, False)
+                show(posort, False)
             elif wybor == 's':
                 liczby = numbers_g.copy()
-                show(liczby, True)
+                show(liczby)
                 posort = selectionsort(liczby)
-                show(possort, False)
+                show(posort, False)
             elif wybor == 'q':
                 liczby = numbers_g.copy()
-                show(liczby, True)
+                show(liczby)
                 posort = quicksort(liczby)
-                show(possort, False)
+                show(posort, False)
             else:
-                print("Niepoprawny wybor")
-        menu()
-    
+                print("Zły wybór...")
         
-        wyb = input("Czy chcesz kontynuowac? (t/n): ")
-        if wyb in ('t', 'T', 'n', 'N'):
-            if wyb != 't' and wyb != 'T':
-                print("Spierdalaj")
+        koniec = input("Czy chesz kontynuować? (t/n)")
+        if koniec in ('t', 'T', 'n', 'N'):
+            if koniec != 't' and koniec != 'T':
+                print(".... Wywalaj ...")
                 break
-        else:
-            wyb = input("Czy chcesz wygenerowac nowe liczby? (t/n): ")
-            if wyb in ('t', 'T', 'n', 'N'):
-                if wyb == 't' or wyb == 'T':
-                    czygen = True
+            else:
+                wyb = input("Czy chcesz wygenerować nowe liczby? (t/n)")
+                if wyb in ('t', 'T', 'n', 'N'):
+                    if wyb == 't' or wyb =='T':
+                        czygen = True
+                    else:
+                        czygen = False
                 else:
-                    print("Wybierz")
+                    print("umiesz pisac dziadygo?")
+        else:
+            print("slepy jelop")
+# =====================================
+if __name__ == "__main__":
+    main()   
+        
             
-                
-  
-#============================    
-main()

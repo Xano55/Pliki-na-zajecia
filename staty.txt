@@ -1,0 +1,1 @@
+suma - 50 srednia - 0.0 iloczyn - 50 maxint - 50 minint - 0 

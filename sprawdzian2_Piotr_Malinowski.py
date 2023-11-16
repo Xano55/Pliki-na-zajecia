@@ -11,9 +11,8 @@ import random as rd;
 liczby = [rd.randint (1, 100) for i in range (1000)]
 try:
     with open("liczby.txt", "w") as liczba:
-        for i in range(1000):
+        for i in range(100):
             liczba.write(f"{rd.randint(1, 100)}\n")
-        liczba.write(f"{rd.randint(1, 100)}\n")
 except FileNotFoundError:
     print("Nie znaleziono pliku")
 #===================Zadanie 3==================# 

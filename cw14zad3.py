@@ -57,7 +57,7 @@ def wykres(a,b,c,delta,poczatek,koniec,krok):
         y = float(a*(x**2) + (b*x) + c)
         wykres.circle([x], [y], size = 3, color = "blue", alpha = 0.5)
         x += krok
-    show(wykres)
+    show(wykres) 
     
 def main():
     print("Aplikacja do kreslenia funkcji kwadratowej")
